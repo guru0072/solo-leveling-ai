@@ -27,6 +27,17 @@ CREATE TABLE IF NOT EXISTS missions (
     status TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    email TEXT UNIQUE,
+    display_name TEXT,
+    password_hash TEXT,
+    height_cm INTEGER,
+    weight_kg REAL,
+    activity_level TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
@@ -35,6 +46,7 @@ def init_db():
     conn.executescript(SCHEMA)
     conn.commit()
     conn.close()
+
 
 @contextmanager
 def get_db_session():
